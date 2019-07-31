@@ -456,7 +456,9 @@ function user_prompts {
                 main_proj=`echo $main_proj | cut -d '/' -f 2 | cut -d '.' -f 1`
             fi
         elif [ $VCS = "git" ]; then
-            if [ $ssh_checkout = "false" ]; then
+	    if [ $main_proj = COIN-OR-OptimizationSuite ]; then
+                main_proj_url="git@github.com:edbarton1/$main_proj"		
+            elif [ $ssh_checkout = "false" ]; then
                 main_proj_url="https://github.com/coin-or/$main_proj"
             else
                 main_proj_url="git@github.com:coin-or/$main_proj"
@@ -465,13 +467,13 @@ function user_prompts {
             main_proj_url="https://projects.coin-or.org/svn/$main_proj/$main_proj_version/$main_proj"
         fi
         if [ x$main_proj_version = x ]; then
-            if [ `echo $main_proj_url | cut -d '/' -f 3` = "projects.coin-or.org" ]; then
+            if [ `echo "$main_proj_url" | cut -d '/' -f 3` = "projects.coin-or.org" ]; then
                 main_proj_version=trunk
             else
                 main_proj_version=master
             fi
         fi
-        if [ x`echo $main_proj | cut -d '-' -f 1` = x"CHiPPS" ]; then
+        if [ x`echo "$main_proj" | cut -d '-' -f 1` = x"CHiPPS" ]; then
             case `echo $main_proj | cut -d '-' -f 2` in
                 ALPS)
                     main_proj_dir=Alps
