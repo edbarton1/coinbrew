@@ -467,7 +467,7 @@ function user_prompts {
             main_proj_url="https://projects.coin-or.org/svn/$main_proj/$main_proj_version/$main_proj"
         fi
         if [ x$main_proj_version = x ]; then
-            if [ `echo "$main_proj_url" | cut -d '/' -f 3` = "projects.coin-or.org" ]; then
+            if [ x`echo $main_proj_url | cut -d '/' -f 3` = "xprojects.coin-or.org" ]; then
                 main_proj_version=trunk
             else
                 main_proj_version=master
